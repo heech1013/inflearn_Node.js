@@ -1,0 +1,60 @@
+<script>
+
+// 생성
+var $div = $('<div>Hello</div>');  // $ 안에 만들고 싶은 태그를 적어 넣으면 된다.
+// 순수 js
+var div = document.createElement('div');
+var text = document.createTextNode('Hello');
+div.appendChild(text);
+
+// append, appendTo: (위에서 만든) 태그를 추가. 맨 마지막 자식 요소로 추가된다.
+// 부모.append(자식) / 자식.appendTo(부모)
+$('#zero').append($div);
+$div.appendTo($('#zero'));
+// 순수 js
+document.getElementById('zero').appendChild(div);
+
+// prepend, prependTo: 맨 첫 요소로 추가.
+// 부모.prepend(자식) / 자식.prependTo(부모)
+$('#zero').prepend($div);
+$div.prependTo($('#zero'));
+// 순수 js
+document.getElementById('zero').insertBefore(div, document.getElementById('zero').firstChild);
+
+// after, insertAfter: 특정 태그 다음에 추가.
+// 부모.after(자식) / 자식.insertAfter(부모)
+$('#zero').after($div);
+$div.insertAfter($('#zero'));
+// 순수 js
+document.getElementById('zero').parentElement.insertBefore(div, document.getElementById('zero').nextElementSibling);
+
+// before, insertBefore: 턱정 태그 이전에 추가.
+// 부모.before(자식) / 자식.insertBefore(부모)
+$('#zero').before($div);
+$div.insertBefore($('#zero'));
+// 순수 js
+document.getElementById('zero').parentElement.insertBefore(div, document.getElementById('zero'));
+
+// clone: 특정 태그를 복사. 태그 안의 내용까지 전부 다 복사된다.
+var $zero = $('#zero').clone(); // $zero에 복사된 태그가 담김
+// 순수 js
+var zero = document.getElementById('zero').cloneNode(true);
+
+// remove, detach: 특정 태그 제거.
+// remove: 완전히 제거 / detach: 잠시 제거
+// 변수에 저장해두었다가 나중에 appendTo로 다시 붙이면 된다.
+var $zero = $('#zero').detach();
+$('#zero').remove();
+// 순수 js
+document.getElementById('zero').parentNode.removeChild(document.getElementById('zero'));
+
+// empty: 태그 안의 내용을 비운다.
+$('#zero').empty();
+// 순수 js
+document.getElementById('zero').innerHTML = '';
+
+
+
+
+
+</script>

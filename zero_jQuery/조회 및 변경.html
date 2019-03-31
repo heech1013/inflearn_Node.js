@@ -1,0 +1,76 @@
+<script>
+// 선택한 태그의 속성이나 내용, 스타일, 데이터를 조회하거나 변경하는 방법.
+
+// 대상 태그(예시)
+<div id="zero" hidden="false" name="zero" class="babo" value="Hello" data-age="23">Content</div>
+
+// get: jQuery 객체를 javascript 객체로 다시 전환.
+// 첫 번째 인자: 여러 개의 태그(클래스 같은 경우 여러 개의 태그를 동시에 선택 가능) 중에 몇 번째 태그를 자바스크립트 객체로 전환할 건지 선택.
+$('#zero').get(0);  // <div id="zero"></div>
+
+// attr: 속성을 조회하거나 변경할 수 있는 메소드.
+// 인자를 하나만 주면 해당 속성의 값을 조회하고, 두 개를 주면 해당 소것ㅇ의 값을 변경한다.
+$('#zero').attr('name');  // 'zero'
+$('#zero').attr('name', 'hero');  // name 속성을 hero로 변경
+document.getElementById('zero').name = 'hero'
+
+// val: value 속성만을 다루는 메소드.
+// 인자가 없으면 value를 조회하고, 인자가 있으면 그 값으로 value를 바꿉니다.
+$('#zero').val();  // 'zero'
+$('#zero').val('hero');  // value를 hero로 변경
+document.getElementById('zero').value = 'hero';
+
+// prop: 속성 중 true/false 값을 가지는 속성만을 위한 메소드(hidden, readonly, checked 등)
+$('#zero').prop('hidden');  // false
+$('#zero').prop('hidden', true);  // hidden 속성의 값을 true로 변경
+
+// addClass: 클래스 추가
+$('#zero').addClass('genius');
+document.getElementById('zero').classList.add('genius');
+
+// removeClass: 클래스 제거
+$('#zero').removeClass('genius');
+document.getElementById('zero').classList.remove('genius');
+
+// toggleClass: 해당 클래스가 있으면 지우고, 없으면 만든다.
+$('#zero').toggleClass('genius');  // genius 추가
+$('#zero').toggleClass('genius');  // genius 삭제
+document.getElementById('zero').classList.toggle('genius')
+
+// html: innerHTML과 같다
+$('#zero').html();  // Content
+$('#zero').html('Changed');  // 내용을 Changed로 변경
+document.getElementById('zero').innerHTML = 'Changed';
+
+// text: textContent를 바꾼다. innerHTML고 ㅏ달리 태그를 넣을 수는 없다.
+$('#zero').text(); // Content
+$('#zero').text('TextChanged'); // 내용을 TextChanged로 변경
+
+// css: 스타일 속성을 조회하거나 변경.
+// 인자를 하나만 주면 해당 스타일 속성값을 조회, 두 개를 주면 해당 값으로 변경.
+// 두 개의 인자를 따로 주는 대신에 하나의 객체를 인자로 넘겨 여러 스타일을 동시에 바꿀 수 있다.
+$('#zero').css('width');  // 465px
+$('#zero').css('width', 300);  // 300px로 변경
+$('#zero').css({ width: 300, height: 300 });  // 여러 스타일 동시 변경
+document.getElementById('zero').style.width = '300px';
+
+// height: 태그의 높이를 알려준다.
+$('#zero').height();
+document.getElementById('zero').style.height;
+
+// width: 태그의 너비를 알려준다.
+$('#zero').width();
+document.getElementById('zero').style.width;
+
+// position: 태그의 상대적인 위치를 알려준다.
+$('#zero').position(); // { left: 값, top: 값 }
+var el = document.getElementById('zero');
+
+// data: 태그에 데이터를 조회하거나 저장. html5에서는 태그에 데이터를 저장할 수 있다
+// date- 접두어를 붙인다. 이렇게 만들어진 데이터는 data 메소드로 가져올 수 있다.
+$('#zero').data('age'); // 23
+$('#zero').data('age', 24); // data-age를 24로 변경
+document.getElementById('zero')['data-age'] = 24;
+
+
+</script>

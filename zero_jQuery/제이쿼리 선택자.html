@@ -1,0 +1,53 @@
+<script>
+// 아이디(#)
+document.getElementById('zero');  // 기존
+$('#zero');  // jQuery
+document.querySelector('#zero');  // ES5 대안
+
+// 클래스(.)
+document.getElementsByClassName('zero');  // 기존
+$('.zero');  // jQuery
+document.querySelectorAll('.zero');  // ES5 대안
+
+// 태그
+document.getElementsByTagName('p');  // 기존
+$('p');  // jQuery
+
+// 속성
+// 기존의 자바스크립트로는 함수가 존재하지 않으며, 직접 만들어야 한다.
+$('[value]');  // jQuery. value라는 속성을 가진 태그
+$('[value="zero"]');  // jQuery. value라는 속성이 "zero"라는 값을 가진 태그
+document.querySelectorAll('[value]');  // ES5 대안
+document.querySelectorAll('[value="zero"]');  // ES5 대안
+
+// 자식 선택자
+Array.prototype.filter.call(document.getElementById('zero').children, function(item) {
+  return item.tagName === 'P';
+});  // 기존. #zero 태그의 자식인 p 태그의 선택
+$('#zero > p');  // jQuery. > 기호가 자식 태그임을 알려준다.
+document.querySelectorAll('#zero > p');  // ES5
+
+// 후손 선택자(해당 태그 아래에 포함된 모든 태그. 자식 태그는 해당 태그 바로 아래의 태그만을 말한다.)
+document.getElementById('zero').getElementsByTagName('div');  // 기존. #zero 태그 아래의 모든 div 선택
+$('#zero div');  // jQuery. 띄어쓰기 한 칸으로 후손 태그임을 알려준다.
+document.querySelectorAll('#zero div');  // ES5
+
+// 형제자매 선택자
+$('#zero + div');  // #zero 바로 다음 div 하나를 선택한다.
+$('#zero ~ p');  // #zero의 형제자매 p를 모두 선택한다.
+document.querySelectorAll('#zero + div');
+document. querySelectorAll('#zero ~ p');
+
+// 가짜 선택자
+$(':input'), $(':button'), $(':image'), $(':checkbox'), $(':radio'), $(':text'); // 각각 모든 인풋, 버튼, 이미지, 체크박스, 라디오, 텍스트인풋 태그를 선택합니다.
+$(':odd'), $(':even'), $(':gt(순서)'), $(':lt(순서)'), $(':last') // 각각 홀수 번째, 짝수 번째 태그, 주어진 순서보다 순서가 큰 태그, 순서가 작은 태그, 선택된 것들 중에 마지막 태그를 선택합니다.
+$(':focus'), $(':parent'), $(':empty');, $(':disabled'), $(':enabled'), $(':visible'), $(':hidden'); // 각각 현재 포커스된 태그, 자식이 하나라도 있는 태그, 자식이 없는 태그, 비활성화된 태그, 활성화된 태그, 투명이 아닌, 숨겨진 태그를 선택합니다.
+$(':visible'), $(':checked'), $(':selected'), $(':only-child');, $(':first-child'), $(':last-child') // 각각 체크된(체크박스), 선택된(select), 부모의 유일한 자식인 태그, 첫 번째 자식인 태그, 마지막 자식인 태그를 선택합니다.
+$(':nth-child(순서)'), $(':nth-of-type(순서)'), $(':eq(순서)'); // 각각 순서 번째 자식 태그, 해당 타입 중 순서 번째 자식 태그, 순서 번째 태그를 찾습니다. eq는 0부터 시작하고, nth-child는 1부터 시작합니다.
+$(':has(선택자)'), $(':contains(텍스트)'); // 각각 선택자를 자식으로 갖고 있는 태그나 해당 텍스트를 갖고 있는 태그를 선택합니다.
+
+// 조합
+$('p#zero:checkbox');  // 조합: 태그 이름이 p면서 id는 zero이고 checkbox인 태그 선택.
+$('#zero, .nero, p');  // 쉼표를 사용하여 #zero와 .nero 와 p 태그를 모두 선택.
+
+</script>

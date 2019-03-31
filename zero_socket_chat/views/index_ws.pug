@@ -1,0 +1,18 @@
+//- ws용 프론트.
+doctype
+html
+  head
+    meta(charset='utf-8')
+    title GIF 채팅방
+  body
+    div F12를 눌러 console 탭과 network 탭을 확인하세요.
+    script.
+      //- 웹소켓 스크립트 부분
+      var webSocket = new WebSocket('ws://localhost:8005');  // 객체를 선언함으로써 웹 소켓을 프론트엔드에서 사용할 수 있다. / 프로토콜은 ws나 wss(https인 경우)로 바꾼다.
+      webSocket.onopen = function() {  // 양방향 연결 수립 시 프론트에는 onopen 이벤트, 서버에는 connection 이벤트 발생
+        console.log('서버와 웹 소켓 연결 성공!');
+      };
+      webSocket.onmessage = function (event) {  // 서버의 ws.send와 대응.
+        console.log(event.data);  // ws.send 안의 내용이 event.data에 담겨온다.
+        webSocket.send('클라이언트에서 서버로 답장을 보냅니다.');  // 서버의 ws.on('message') 이벤트와 대응. 프론트에서 서버로 메시지를 보낸다. 
+      };

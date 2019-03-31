@@ -1,0 +1,23 @@
+//- socket.io용 프론트
+doctype
+html
+  head
+    meta(charset='utf-8')
+    title GIF 채팅방
+  body
+    div F12를 눌러 console 탭과 network 탭을 확인하세요.
+    script(src='/socket.io/socket.io.js')
+    script.
+        //- 웹소켓 스크립트 부분
+        //- path: 서버 쪽 코드(socket.js)의 path와 일치해야 함
+        //- transports: socket.io는 처음 클라이언트나 서버로 웹 소켓을 지원하는지 여부를 묻는 http 요청을 보낸다. 웹 소켓을 지원하지 않는 경우 http방식, flash방식 등등으로 변환. transports 조건을 달 경우 묻지 않고 바로 웹소켓 실행.
+      var socket = io.connect('http://localhost:8005', {
+        path: '/socket.io',
+        transports: ['websocket']
+      });
+      
+        //- Socket.IO에서는 메시지 이벤트를 키와 값으로 구분할 수 있다. / 서버 코드(socket.js)의 socket.emit('news', '~')가 이곳에 걸린다. / socket.emit('reply', '~')는 서버코드(socket.js)의 socket.on('reply', '')에 걸리는 것.
+      socket.on('news', fucntion(data) {
+        console.log(data);
+        socket.emit('reply', 'Hello Node.js');
+      });

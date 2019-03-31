@@ -1,0 +1,84 @@
+<!-- DOM 구조 예시-->
+html
+  head
+    title
+  body
+    div#container
+      header
+      div.main
+        nav
+        div#zero
+          p
+            b
+            em
+          span
+          input
+        div#nero
+        div#hero
+      footer
+
+<script>
+
+// * 아래의 메소드들은 연달아 사용할 수 있다(메소드 체이닝 기법)
+
+$('div#zero');  // div#zero 선택
+
+// parent: 부모 태그 선택
+$('div#zero').parent();  // [div.main]
+document.getElementById('zero').parantElement;
+
+// parents: 부모부터 시작하여 조상 태그 모두 선택
+$('div#zero').parents();  // [div.main, div#container, body, html]
+
+// parentsUntil: 부모부터 시작해서 선택한 조상 태그 이전까지를 모두 선택
+$('div#zero').parentsUntil('body');  // [div.main, div#container]
+
+// closest: 조상 태그 선택
+$('div#zero').closest('#container');  // [div#container]
+
+// children: 자식 태그 모두 선택
+$('div#zero').children();  // [p, span, input]
+document.getElementById('zero').children;
+
+// first: 선택한 태그 중 첫 번째 태그를 선택
+$('div#zero').children().first();  // [p]
+document.getElementById('zero').firstChild;
+
+// last: 선택한 태그 중 마지막 태그를 선택
+$('div#zero').children().last();  // [input]
+document.getElementById('zero').lastChild;
+
+// eq: 선택한 태그 중 n번째 태그를 선택. 순서가 0부터 시작.
+$('div#zero').children().eq(1);  // [span]
+document.getElementById('zero').children[1];
+
+// find: 후손 태그 선택
+$('div#zero').find('em');  // [em]
+document.getElementById('zero').getElementsByTagName('em');
+
+// next: 형제자매 태그 중 다음 태그를 선택할 수 있다.
+$('div#zero').next();  // [div#nero]
+document.getElementById('zero').nextElementSibling;
+
+// nextAll: 형제자매 태그 중 다음 모든 태그를 선택
+$('div#zero').nextAll();  // [div#nero, div#hero]
+
+// nextUntil: 다음 태그부터 선택한 태그 이전까지를 모두 선택
+$('div#zero').nextUntil('div#hero');  // [div#nero]
+
+// prev: 형제자매 태그 중 이전 태그 선택
+$('div#zero').prev();  // [nav]
+document.getElementById('zero').prevElementSibling;
+
+// prevAll: 형제자매 태그 중 이전 모든 태그를 선택
+$('div#nero').prevAll();  // [nav, div#zero]
+
+// prevUntil: 선택한 태그 이후부터 이전 태그까지를 모두 선택
+$('div#nero').prevUntil('nav');  // [div#zero]
+
+// siblings: prevAll과 nextAll을 합쳐놓은 메소드. 모든 형제자매 태그를 선택
+$('div#zero').siblings();  // [nav, div#nero, div#hero]
+
+// filter: 선택한 태그들 중에서 원하는 태그를 걸러낸다
+$('div').filter('#zero');  // [div#zero]
+</script>

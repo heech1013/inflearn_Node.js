@@ -1,0 +1,97 @@
+<script>
+
+// $(function() {내용});
+// 또는 $(document).ready(function() {내용});
+// document가 ready되면(DOM 로딩이 완료되면) 콜백 함수의 내용을 실행하라는 것.
+$(function() { alert('hello') });
+// 순수 js
+function ready(fn) {
+  if (document.readyState != 'loading') {
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+ready(function() { alert('hello'); });
+
+// On
+$('#zero').on('이벤트명', function() {
+  // 내용...
+});
+$('#zero').on('이벤트1 이벤트2', function() {  // 여러 개의 이벤트에 하나의 콜백 함수를 설정
+  // 내용...
+});
+$('#zero').on({  // 각각의 이벤트에 다른 콜백 함수를 설정.
+  이벤트1: function() {},
+  이벤트2: function() {},
+  // ...
+});
+$('#zero')  // 위와 같지만 체이닝 기법으로 구현
+  .on('이벤트1', function() {
+    //...
+  })
+  .on('이벤트2', function() {
+    // ...
+  })
+  // .on(...
+
+/* 아직 생성되지 않은 태그에 이벤트를 미리 달아놓을 수도 있다.
+예를 들면 AJAX 요청으로 태그를 새로 가져오거나 만들 때가 있다.
+이런 태그들에 이벤트를 직접 달기 어려울 때, 이벤트를 미리 달아놓는 기법을 사용한다.
+이를 Delegation이라고 부르며, 이전의 delegate 메소드가 이 역할을 했다가, on으로 통합되었다.
+*/// ㄴ> 두 번째 인자를 통해 새로 추가될 태그의 선택자를 추가
+$(document).on('이벤트명', '선택자', function() {
+  // 내용;
+});
+// off: 달았던 이벤트를 끈다
+$('#zero').off('이벤트명');
+
+/* 만약 같은 이벤트가 여러 개 달려있어서 선택적으로 끄고 싶다면,
+이벤트 이름 뒤에 네임스페이스를 붙여줄 수 있다.
+아래의 예는 click 이벤트가 두 개 달려있다. 두 클릭 이벤트를 구분하기 위해 점 뒤에 네임스페이스를 달았다(first, second)
+*/
+$('#zero').on('click.first', function() { '...' }).on('click.second', function() { '...' });
+$('#zero').off('click.first');  // click.second 이벤트는 유지
+
+// one: 이벤트를 한 번만 실행되게 함
+$('#zero').one('이벤트명', function () {
+  // 내용...
+});
+
+// 이벤트 메소드: 직접 이벤트명을 메소드로 하는 메소드.
+// click, mouseenter, mouseleave, dbclick, input, ready 등 거의 모든 이벤트에 해당하는 메소드가 존재.
+// 그냥 on 메소드를 쓰는 것을 추천(나중에 수정하기 편함)
+$('#zero').click(function() {});
+$('#zero').hover(function() {});  // hover: mouserenter와 mouseleave를 합쳐놓은 메소드.
+// 마우스를 어떤 태그 위에 올렸다가 뺐다 할 때 수행할 동작을 정의할 수 있다.
+
+// 이벤트 객체
+// 콜백함수의 첫 인자로 이벤트 객체가 전달된다.
+// preventDefault: 태그의 기본 동작(a는 링크이동, form은 폼내용전송 등)을 하지 않게 막아준다.
+// stopPropagation: 태그를 클릭 시 부모에게 이벤트가 전달되지 않도록 한다.
+$('#zero').click(function(event) {
+  event.prevenDefault();
+  event.stopPropagation();
+});
+
+// 이벤트 실행
+// trigger: 이벤트를 실행
+$('#zero').on('click', function() { 내용 });
+$('#zero').trigger('click');
+// 커스텀 이벤트를 만들고 호출할 수 있다는 것이 장점.
+$('#zero').on('custom', function() { 내용 });
+$('#zero').trigger('custom');
+
+// 기타
+// 콜백함수 안에서 $(this)로 이벤트가 발생한 객체를 선택할 수 있다.
+$('a').click(function() {
+  $(this); // 여러 개의 a태그 중 클릭된 a 태그를 선택
+});
+// 이벤트 과정 도중에 데이터를 전달할 수 있다.
+// 전달한 데이터는 event 객체의 data 속성에 들어있다.
+$('#zero').on('click', { name: 'Zero' }, function(event) {
+  alert(event.data.name);  // Zero
+});
+
+
+</script>
